@@ -1,30 +1,33 @@
 /*
-    Project name : Ultrasonic Sensor
-    Modified Date: 10-06-2024
+    Project name : Arduino Uno Water Level Sensor
+    Modified Date: 29-06-2024
     Code by : Projectslearner
-    Website : 
+    Website : https://projectslearner.com/learn/arduino-uno-water-level-sensor
 */
 
-const int floatSwitchPin = 2; // Digital pin connected to the float switch
-const int ledPin = 13; // Digital pin connected to the LED
+// Define the pin connected to the water level sensor
+const int waterLevelSensorPin = 2;
 
-void setup() {
-  Serial.begin(9600); // Initialize serial communication
-  pinMode(floatSwitchPin, INPUT); // Set float switch pin as input
-  pinMode(ledPin, OUTPUT); // Set LED pin as output
+void setup() 
+{
+  // Initialize serial communication for debugging
+  Serial.begin(9600);
+
+  // Set the water level sensor pin as input
+  pinMode(waterLevelSensorPin, INPUT);
 }
 
 void loop() {
-  int waterLevel = digitalRead(floatSwitchPin); // Read float switch value
-  
-  // Print water level to Serial Monitor
-  if (waterLevel == HIGH) {
-    Serial.println("Water Level: HIGH (Float switch triggered)");
-    digitalWrite(ledPin, HIGH); // Turn on LED if float switch is triggered
+  // Read the state of the water level sensor
+  int waterLevelState = digitalRead(waterLevelSensorPin);
+
+  // Print the water level sensor state to the Serial Monitor
+  if (waterLevelState == HIGH) {
+    Serial.println("Water detected");
   } else {
-    Serial.println("Water Level: LOW (No water)");
-    digitalWrite(ledPin, LOW); // Turn off LED if no water is detected
+    Serial.println("No water detected");
   }
-  
-  delay(1000); // Add a delay to avoid flooding the Serial Monitor with messages
+
+  // Add a small delay to avoid flooding the Serial Monitor
+  delay(200);
 }
